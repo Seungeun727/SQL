@@ -17,3 +17,6 @@ Alter session set "_ORACLE_SCRIPT" = true;  -- Ctrl + Enter
 SELECT * FROM tab;
 --특성 테이블의 정보 확인
 DESC employees;
+
+
+
