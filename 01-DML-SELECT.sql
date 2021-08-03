@@ -56,6 +56,86 @@ SELECT first_name || ' ' || last_name 이름, phone_number as 전화번호,
 SELECT first_name || ' ' || last_name 이름, hire_date as 입사일, phone_number "전화번호",
        salary 급여, salary * 12 연봉 FROM employees;
 
+----------
+-- WHERE
+----------
+
+-- 비교연산
+-- 급여가 15000 이상인 사원의 목록
+SELECT first_name, salary
+FROM employees
+WHERE salary >= 15000;
+
+-- 날짜도 대소 비교 가능
+-- 입사일이 07/01/01 이후인 사원의 목록
+SELECT first_name, hire_date
+FROM employees
+WHERE hire_date >= '07/01/01';
+
+-- 이름이 Lex인 사원의 이름, 급여, 입사일 출력
+SELECT first_name, salary, hire_date
+FROM employees
+WHERE first_name = 'Lex';
+
+-- 논리연산자
+-- 급여가 10000 이하이거나 17000 이상인 사원의 목록
+SELECT first_name, salary 
+FROM employees
+WHERE salary <= 10000 OR
+    salary >= 17000;
+
+-- 급여가 14000 이상, 17000 이하인 사원의 목록
+SELECT first_name, salary
+FROM employees
+WHERE salary >= 14000 AND
+    salary <= 17000;
+
+-- BETWEEN: 위 쿼리와 결과 동일
+SELECT first_name, salary
+FROM employees
+WHERE salary BETWEEN 14000 AND 17000;
+
+-- 널 체크
+-- = NULL, != NULL은 하면 안됨
+-- 반드시 IS NULL, IS NOT NULL 사용
+-- 커미션을 받지 않는 사원의 목록 
+SELECT first_name, commission_pct 
+FROM employees
+WHERE commission_pct IS NULL;
+
+-- 연습문제: TODO
+-- 담당 매니저가 없고, 커미션을 받지 않는 사원의 목록
+
+-- 집합 연산자: IN
+-- 부서번호가 10, 20, 30인 사원들의 목록
+SELECT first_name, department_id
+FROM employees
+WHERE department_id = 10 OR
+    department_id = 20 OR
+    department_id = 30;
+
+-- IN
+SELECT first_name, department_id
+FROM employees
+WHERE department_id IN (10, 20, 30);
+
+-- ANY 
+SELECT first_name, department_id
+FROM employees
+WHERE department_id =ANY (10, 20, 30);
+
+-- ALL: 뒤에 나오는 집합 전부 만족
+SELECT first_name, salary 
+FROM employees
+WHERE salary >ALL(12000, 17000);
+
+-- LIKE 연산자: 부분 검색
+-- %: 0글자 이상의 정해지지 않은 문자열
+-- _: 1글자(고정) 정해지지 않은 문자
+-- 이름에 am을 포함한 사원의 이름과 급여를 출력
+SELECT first_name, salary
+FROM employees
+WHERE first_name LIKE '%am%';
 
 
     
