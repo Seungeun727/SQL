@@ -57,25 +57,7 @@ SELECT first_name || ' ' || last_name 이름, hire_date as 입사일, phone_numb
        salary 급여, salary * 12 연봉 FROM employees;
 
 
--- 연습:
--- 이름의 두번째 글자가 a인 사원의 이름과 연봉
 
--- ORDER BY: 정렬
--- 오름차순: 작은 값 -> 큰 값 ASC(default)
--- 내림차순: 큰 값 -> 작은값 DESC
-
--- 부서번호 오름 차순 -> 부서번호, 급여, 이름
-SELECT department_id,
-    salary, first_name FROM employees ORDER BY department_id; -- 오름차순 정렬
-
--- 급여 10000이상 직원
--- 정렬 : 급여 내림차순
--- SELECT first_name salary >= 10000 FROM employees ORDER BY salary DESC; 
-
--- 출력 : 부서 번호, 급여 , 이름
--- 정렬: 1차정렬 부서번호 오름차순, 2차정렬 급여 내림차순
-SELECT department_id, salary, first_name FROM employees ORDER BY department_id, -- 1차 정렬 
-    salary DESC; -- 2차 정렬
     
 
 
