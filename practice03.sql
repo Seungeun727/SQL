@@ -171,7 +171,8 @@ WHERE salary = (SELECT salary FROM employees WHERE department_id = 110);
 -- 결과가 다중행이면 집합 연산자를 활용 
 -- salary = 120008 OR salary = 8300
 SELECT first_name, salary FROM employees
-WHERE salary IN (SELECT salary FROM employees WHERE department_id = 110);
+WHERE salary 
+IN (SELECT salary FROM employees WHERE department_id = 110);
 
 -- ALL(AND)
 -- salary > 12008 AND salary > 8300
@@ -200,7 +201,7 @@ GROUP BY department_id)
 ORDER BY department_id;   
 -- IN ( ) 설명 :  (10 , 4400)를 가짐.
 
--- 방법 2> : 서브쿼리와 조인을 이ㅛㅇ
+-- 방법 2> : 서브쿼리와 조인을 이용
 SELECT e.department_id, e.employee_id, e.first_name, e.salary
 FROM employees e, (SELECT department_id, MAX(salary) salary FROM employees
                    GROUP BY department_id) sal

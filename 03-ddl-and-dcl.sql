@@ -65,3 +65,4 @@ GRANT select ON HR.EMPLOYEES  TO C##BITUSER;
 -- GRANT all privilegs...
 
 
+
