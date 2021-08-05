@@ -89,7 +89,7 @@ SELECT e.employee_id, e. first_name,
     e.hire_date, m.first_name,
     m.hire_date
 FROM employees e, employees m
-WHERE e.manager_id = m.manger_id AND
+WHERE e.manager_id = m.manager_id AND
     e.hire_date < m.hire_date;
     
 -- 문제 6
