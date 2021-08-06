@@ -8,11 +8,11 @@
 -- System 계정으로 수행
 
 -- 사용자 계정으로 수행: CREATE USER
-CREATE USER C##bituser IDENTIFIED BY bituser;
+CREATE USER c##bituser IDENTIFIED BY bituser;
 
 -- SQLPLUS에서 사용자로 접속
 -- 사용자 삭제: DROP USER
-DROP USER C##bituser CASCADE; -- CASCADE 연결된 모든 것을 함께 삭제
+DROP USER c##bituser CASCADE; -- CASCADE 연결된 모든 것을 함께 삭제
 
 -- 다시 생성 
 CREATE USER C##bituser IDENTIFIED BY bituser;
@@ -65,4 +65,62 @@ GRANT select ON HR.EMPLOYEES  TO C##BITUSER;
 -- GRANT all privilegs...
 
 
+---------
+-- DDL
+---------
+-- 이후 C##BITUSER로 진행
 
+-- 현재 내가 소유한 테이블 목록 확인
+SELECT * FROM tab;  --  --> 가상 테이블 확인
+-- 현재 나에게 주어진 ROLE을 조회
+SELECT * FROM USER_ROLE_PRIVS; 
+
+-- CREATE TABLE: 테이블 생성
+CREATE TABLE book (
+    book_id NUMBER(5),
+    title VARCHAR2(50),   --  --> VARCHAR2: 가변 문자열
+    author VARCHAR2(10),
+    pub_date DATE DEFAULT SYSDATE
+); -- 괄호 내부 : 테이블 정의
+
+SELECT * FROM tab;
+DESC book;
+
+-- 서브쿼리를 이용한 테이블 생성
+-- HR스키마의 employees 테이블의 일부 데이터를 추출, 새 테이블 생성
+SELECT * FROM HR.employees;
+--job_id 컬럼 내부의 IT_ 관련 직원들 데이터만 뽑아내어 새 테이블 생성
+CREATE TABLE it_emps AS (  --  -- > AS : 삽입
+    SELECT * FROM hr.employees
+    WHERE job_id LIKE 'IT_%'
+);
+
+DESC IT_EMPS;
+SELECT * FROM IT_EMPS;
+
+DROP TABLE IT_TEMPS; -- 삭제
+
+-- author 테이블 추가
+CREATE TABLE author (
+    author_id NUMBER(10),
+    author_name VARCHAR2(50) NOT NULL,
+    author_desc VARCHAR2(500),
+    PRIMARY KEY (author_id) -- 테이블 제약
+);
+
+DESC author;
+
+-- book 테이블의 author 컬럼 지우기
+-- 나중에 author 테이블과 FK 연결
+DESC book;
+ALTER TABLE book DROP COLUMN author;
+
+-- author 테이블 참조를 위한 컬럼 author_id 추가
+ALTER TABLE book
+ADD (author_id NUMBER(10));
+
+-- book 테이블의 book_id도 NUMBER(10)으로 변경
+ALTER TABLE book
+MODIFY (book_id NUMBER(10));
+
+DESC book;
