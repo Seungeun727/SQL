@@ -84,7 +84,49 @@ WHERE e.department_id = t.department_id AND
     e.salary > t.salary;
 
 
+-- 문제 8번 ---> 다른 방법 찾아보기!
+-- 풀지 못함
+-- 쿼리 1
+SELECT ROWNUM
+    employee_id,
+    first_name,
+    salary,
+    hire_date
+FROM employees
+ORDER BY hire_date ASC;
 
+--쿼리 2
+SELECT ROWNUM rn,
+    employee_id,
+    first_name,
+    salary,
+    hire_date
+FROM (SELECT 
+            employee_id,
+            first_name,
+            salary,
+            hire_date
+            FROM employees
+            ORDER BY hire_date ASC);
+-- 최종쿼리
+SELECT rn,
+    employee_id,
+    first_name,
+    salary,
+    hire_date
+    FROM ( SELECT ROWNUM rn,
+            employee_id,
+            first_name,
+            salary,
+            hire_date
+    FROM (SELECT 
+                    employee_id,
+                    first_name,
+                    salary,
+                    hire_date
+            FROM employees
+            ORDER BY hire_date ASC))
+WHERE rn BETWEEN 11 AND 15;
 
 
 
