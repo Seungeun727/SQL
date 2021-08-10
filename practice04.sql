@@ -25,7 +25,6 @@ WHERE e.salary BETWEEN t.avgSalary AND t.maxSalary
 ORDER BY salary;
 
 
-
 -- 문제 3번
 
 -- 쿼리1. Steven King이 소속된 부서
