@@ -39,7 +39,6 @@ SELECT MIN(salary),MAX(salary),SUM(salary),ROUND(AVG(salary))
 FROM employees; 
 
 
-
 -- A15.
 
 --방식1. --> 결과처럼 나오지 못함 (해결x)
