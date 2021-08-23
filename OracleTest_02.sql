@@ -1,14 +1,11 @@
 -- ORACLE Database 답안지
 -- 수강생 이름: 노승은
--- 12,13,14
 
 -- A11.
-
 SELECT e.last_name, e.salary, d.department_name
 FROM employees e, departments d
-WHERE e.departmnet_id = d.department_id
+WHERE d.department_id= e.department_id
 AND commission_pct IS NOT NULL;
-
 
 
 SELECT last_name, salary, NVL(commission_pct,0)
@@ -50,6 +47,13 @@ SELECT MIN(salary) MIN ,MAX(salary) MAX ,SUM(salary) SUM ,ROUND(AVG(salary)) AVG
 FROM employees;
 
 -- A15.
+--방식 1 -> 해결 X
 SELECT e.last_name, e.salary
 FROM employees e
-WHERE salary < (SELECT AVG(salary) FROM employees);
+WHERE salary < (SELECT AVG(salary) 
+                FROM employees 
+                WHERE department_id = e.department_id); 
+                
+-- 방식 2 -> 해결 X
+SELECT last_name, salary FROM employees 
+WHERE salary < (SELECT AVG(salary) FROM employees); 
